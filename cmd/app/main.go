@@ -1,9 +1,10 @@
-package app
+package main
 
 import (
 	"log"
 
-	"github.com/Agu-GC/bitso/internal/infraestructure/myHanddler"
+	"github.com/Agu-GC/Bitso/internal/application"
+	"github.com/Agu-GC/Bitso/internal/infraestructure"
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,7 +12,11 @@ func main() {
 	log.Print("Levantando server HTTP")
 	router := gin.Default()
 
-	router.GET("/", myHanddler.Home)
+	userHanddler := infraestructure.UserHanddler{
+		UserService: &application.UserService{},
+	}
+
+	router.GET("/user/:id", userHanddler.GetUser)
 
 	err := router.Run(":8080")
 	if err != nil {

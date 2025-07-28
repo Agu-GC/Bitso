@@ -1,20 +1,22 @@
 package application
 
+import "github.com/Agu-GC/Bitso/internal/domain"
+
 type UserServiceInterface interface {
-	GetUserInfo(id string) User
+	GetUserInfo(id, surname string) domain.User
 }
 
 type UserService struct {
 }
 
-func (u *UserService) GetUserInfo(id string) User {
+func (u *UserService) GetUserInfo(id, surname string) domain.User {
 
 	if id == "" {
-		return User{}
+		return domain.User{}
 	}
 
-	return User{
+	return domain.User{
 		Id:   id,
-		Name: "Pablo",
+		Name: surname,
 	}
 }
